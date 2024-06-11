@@ -1,0 +1,80 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data=pd.read_csv(r"C:\Users\pmthe\Downloads\archive (2)\tested.csv")
+data
+
+print(data.head())
+
+print(data.shape)
+
+data.drop(['Ticket', 'Cabin'], axis=1, inplace=True)
+print(data.describe())
+
+print(data['Pclass'].value_counts())
+
+print(data['Sex'].value_counts())
+
+print(data['Embarked'].value_counts())
+
+data['AgeGroup'] = pd.cut(data['Age'], bins=[0, 18, 50, 100], labels=['Child', 'Adult', 'Senior'])
+print(data['AgeGroup'].value_counts())
+
+data['FareGroup'] = pd.cut(data['Fare'], bins=[0, 10, 30, 100], labels=['Low', 'Medium', 'High'])
+print(data['FareGroup'].value_counts())
+
+print(data['Survived'].value_counts())
+
+print(data.groupby('Pclass')['Survived'].mean())
+
+print(data.groupby('Sex')['Survived'].mean())
+
+print(data.groupby('Embarked')['Survived'].mean())
+
+data.plot(kind='bar')
+plt.title('Mean Fare by Pclass')
+plt.xlabel('Pclass')
+plt.ylabel('Mean Fare')
+plt.show()
+
+passengers_by_pclass = data['Pclass'].value_counts()
+plt.bar(passengers_by_pclass.index, passengers_by_pclass)
+plt.title('Number of Passengers by Pclass')
+plt.xlabel('Pclass')
+plt.ylabel('Count')
+plt.show()
+
+passengers_by_sex = data['Sex'].value_counts()
+plt.bar(passengers_by_sex.index, passengers_by_sex)
+plt.title('Number of Passengers by Sex')
+plt.xlabel('Sex')
+plt.ylabel('Count')
+plt.show()
+
+plt.hist(data['Age'], bins=20)
+plt.title('Age Distribution')
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.show()
+
+average_fare_by_pclass = data.groupby('Pclass')['Fare'].mean()
+plt.hist(average_fare_by_pclass, bins=10)
+plt.title('Average Fare by Pclass')
+plt.xlabel('Average Fare')
+plt.ylabel('Count')
+plt.show()
+
+count_by_embarked = data['Embarked'].value_counts()
+plt.pie(count_by_embarked, labels=count_by_embarked.index, autopct='%1.1f%%')
+plt.title('Passengers by Embarked')
+plt.axis('equal')
+plt.show()
+
+count_by_sex = data['Sex'].value_counts()
+plt.pie(count_by_sex, labels=count_by_sex.index, autopct='%1.1f%%')
+plt.title('Passengers by Sex')
+plt.axis('equal')
+plt.show()
+
