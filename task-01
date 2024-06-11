@@ -1,0 +1,64 @@
+!pip install matplotlib
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df=pd.read_csv(r"C:\Users\pmthe\Downloads\SwimRecords.csv")
+df
+
+df.head()
+
+df.tail()
+
+df.shape
+
+df.columns
+
+df.dtypes
+
+df.info()
+
+df.describe()
+
+name=df["year"].duplicated()
+name
+
+df.isna()
+
+df.ffill()
+
+df['year'].unique()
+
+df['time'].unique()
+
+df['sex'].unique()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df.loc[df['sex'] == 'M', 'year'], df.loc[df['sex'] == 'M', 'time'])
+plt.xlabel('Year')
+plt.ylabel('Life Expectancy (years)')
+plt.title('Male Life Expectancy Over Time')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.bar(df.loc[df['sex'] == 'F', 'year'], df.loc[df['sex'] == 'F', 'time'])
+plt.xlabel('Year')
+plt.ylabel('Life Expectancy (years)')plt.figure(figsize=(8, 6))
+plt.hist(df.loc[df['sex'] == 'M', 'time'], bins=10, edgecolor='black')
+plt.xlabel('Life Expectancy (years)')
+plt.ylabel('Frequency')
+plt.title('Histogram of Male Life Expectancy')
+plt.show()
+
+plt.figure(figsize=(8, 6))
+plt.hist(df.loc[df['sex'] == 'F', 'time'], bins=10, edgecolor='black')
+plt.xlabel('Life Expectancy (years)')
+plt.ylabel('Frequency')
+plt.title('Histogram of Female Life Expectancy')
+plt.show()
+
+
+plt.title('Female Life Expectancy Over Time')
+plt.show()
+
